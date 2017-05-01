@@ -28,14 +28,18 @@ function Traveler(name, hunger, home, sick, alive) {
             return 'Hunt failed.';
         }
     }
-
     this.eat = function () {
         if (this.sick === true) {
             this.home.food = this.home.food - 20;
+            return name + ' is sick and had to eat 20 food to survive. ' + this.home.food + ' food remains.';
         } else {
             this.home.food = this.home.food - 10;
+            return name + ' is healthy and only had to eat 10 food. ' + this.home.food + ' food remains.';
         }
 
+    }
+    this.sidekicks = function () {
+        
     }
     return this;
 }
@@ -51,13 +55,14 @@ function Wagon(day, capacity, food, ammo) {
 }
 
 let Wagon1 = new Wagon(1, 8, 100, 100);
-let ezekiel = new Traveler('Ezekiel', 35, 'Wagon1', false, true);
-let sarah = new Traveler('Sarah', 45, 'Wagon1', true, true);
+let ezekiel = new Traveler('Ezekiel', 35, Wagon1, false, true);
+let sarah = new Traveler('Sarah', 45, Wagon1, true, true);
 
 
 console.log(ezekiel.hunt());
 console.log(Wagon1.ammo);
 console.log(Wagon1.food);
-console.log(Wagon1); 
+console.log(Wagon1);
 
-// console.log(ezekiel.eat());
+console.log(ezekiel.eat());
+console.log(sarah.eat());
