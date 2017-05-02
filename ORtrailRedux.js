@@ -39,26 +39,48 @@ function Traveler(name, hunger, home, sick, alive) {
         }
 
     }
-   // this.sidekicks = function () {
+    this.sidekicks = function () {
         // return this.home.
         /*this.home.capacity = this.home.capacity - 1;
         return this.home.capacity;*/ // that isn't quite right, mess with this when you get home.
         // traveler.length is useful here. or perhaps this.length?  
-        
-        
-    
-    return this;
+
+        return this;
+    } // come back to this
+
+
 }
+
 
 function Wagon(day, capacity, food, ammo) {
-    this.day = day;
-    this.capacity = capacity;
-    this.food = food;
-    this.ammo = ammo;
 
+        this.day = day;
+        this.capacity = capacity;
+        this.food = food;
+        this.ammo = ammo;
+   
 
-    return this;
-}
+        this.join = function (traveler) {
+            // gonna need to push each traveler to an empty array, but am I pushing a 
+            // string of their name or what? Should i create a "passengers" array above?
+            // hit a wall last night need to go over some of these.
+        }
+
+        this.quarantine = function () {
+
+        }
+
+        this.ready = function () {
+
+        }
+
+       // this.next = function() {}
+
+        
+
+        return this;
+    }
+
 
 let Wagon1 = new Wagon(1, 8, 100, 100);
 let ezekiel = new Traveler('Ezekiel', 35, Wagon1, false, true);
@@ -67,26 +89,10 @@ let nathaniel = new Traveler('Nathaniel', 15, Wagon1, true, true);
 let nancy = new Traveler('Nancy', 65, Wagon1, false, true);
 let emmett = new Traveler('Emmett', 40, Wagon1, true, true);
 
-/* let Wagon1 = new Wagon(1, 8, 100, 100);
-let ezekiel = new Traveler('Ezekiel', 35, Wagon1, false, true);
-let sarah = new Traveler('Sarah', 45, Wagon1, true, true);
-let nathaniel = new Traveler('Nathaniel', 15, Wagon1, true, true);
-let nancy = new Traveler('Nancy', 65, Wagon1, false, true);
-let emmett = new Traveler('Emmett', 40, Wagon1, true, true);
-
-let Wagon1 = new Wagon(1, 8, 100, 100);
-let ezekiel = new Traveler('Ezekiel', 35, Wagon1, false, true);
-let sarah = new Traveler('Sarah', 45, Wagon1, true, true);
-let nathaniel = new Traveler('Nathaniel', 15, Wagon1, true, true);
-let nancy = new Traveler('Nancy', 65, Wagon1, false, true);
-let emmett = new Traveler('Emmett', 40, Wagon1, true, true); */
-
-
-// console.log(ezekiel.hunt());
 console.log(sarah.hunt());
 console.log(Wagon1.ammo);
 console.log(Wagon1.food);
 console.log(Wagon1);
 
 console.log(ezekiel.eat());
-console.log(ezekiel.hunger);
+console.log(Wagon1.join());
