@@ -69,10 +69,10 @@ function Wagon(day, capacity, food, ammo) {
 
         //"if this traveler is a member of this wagon, then..."
         // be mindful of the wagon's capacity. passengers.length cannot be > capacity
-
-        this.passengers.push(traveler); // "add their name to the list of passengers"
-        return this.passengers; // OK, right now this seems to work. Gonna keep plugging and see how it fits in.
-
+        if (traveler.home === this) {
+            this.passengers.push(traveler); // "add their name to the list of passengers"
+            return this.passengers; // OK, right now this seems to work. Gonna keep plugging and see how it fits in.
+        }
     }
 
     this.quarantine = function () {
@@ -82,19 +82,25 @@ function Wagon(day, capacity, food, ammo) {
         for (let i = 0; i < this.passengers.length; i++) {
             if (this.passengers[i].sick !== false) {
                 return true;
-            } else {
-                return false;
             }
         }
+        return false;
     }
+
 
     this.ready = function () {
-
-    }
+        // returns the # of passengers who are 'alive' (a property of Traveler objects)
+        // and "ready to travel". RETURN TYPE WILL BE A NUMBER BASED ON BOOLEAN CONDITION
+        let readyToGo = 0;
+        for (i = 0; i < this.passengers.length; i++) {
+            if (this.passengers[i].alive === true) {
+                readyToGo = readyToGo + 1;
+            }
+        }
+        return readyToGo;
+    } // This one seems OK right now, keep an eye on it. 
 
     // this.next = function() {}
-
-
 
     return this;
 }
@@ -117,5 +123,11 @@ console.log(ezekiel.eat());
 console.log(Wagon1.join());
 
 console.log(sarah.sidekicks());*/
+Wagon1.join(ezekiel);
+Wagon1.join(sarah);
+Wagon1.join(nathaniel);
+Wagon1.join(nancy);
+
 console.log(Wagon1.quarantine());
+
 
