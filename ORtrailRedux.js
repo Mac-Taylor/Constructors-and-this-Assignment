@@ -29,6 +29,7 @@ function Traveler(name, hunger, home, sick, alive) {
         }
     }
     this.eat = function () {
+        this.hunger = this.hunger - 25;
         if (this.sick === true) {
             this.home.food = this.home.food - 20;
             return name + ' is sick and had to eat 20 food to survive. ' + this.home.food + ' food remains.';
@@ -38,9 +39,14 @@ function Traveler(name, hunger, home, sick, alive) {
         }
 
     }
-    this.sidekicks = function () {
+   // this.sidekicks = function () {
+        // return this.home.
+        /*this.home.capacity = this.home.capacity - 1;
+        return this.home.capacity;*/ // that isn't quite right, mess with this when you get home.
+        // traveler.length is useful here. or perhaps this.length?  
         
-    }
+        
+    
     return this;
 }
 
@@ -57,12 +63,30 @@ function Wagon(day, capacity, food, ammo) {
 let Wagon1 = new Wagon(1, 8, 100, 100);
 let ezekiel = new Traveler('Ezekiel', 35, Wagon1, false, true);
 let sarah = new Traveler('Sarah', 45, Wagon1, true, true);
+let nathaniel = new Traveler('Nathaniel', 15, Wagon1, true, true);
+let nancy = new Traveler('Nancy', 65, Wagon1, false, true);
+let emmett = new Traveler('Emmett', 40, Wagon1, true, true);
+
+/* let Wagon1 = new Wagon(1, 8, 100, 100);
+let ezekiel = new Traveler('Ezekiel', 35, Wagon1, false, true);
+let sarah = new Traveler('Sarah', 45, Wagon1, true, true);
+let nathaniel = new Traveler('Nathaniel', 15, Wagon1, true, true);
+let nancy = new Traveler('Nancy', 65, Wagon1, false, true);
+let emmett = new Traveler('Emmett', 40, Wagon1, true, true);
+
+let Wagon1 = new Wagon(1, 8, 100, 100);
+let ezekiel = new Traveler('Ezekiel', 35, Wagon1, false, true);
+let sarah = new Traveler('Sarah', 45, Wagon1, true, true);
+let nathaniel = new Traveler('Nathaniel', 15, Wagon1, true, true);
+let nancy = new Traveler('Nancy', 65, Wagon1, false, true);
+let emmett = new Traveler('Emmett', 40, Wagon1, true, true); */
 
 
-console.log(ezekiel.hunt());
+// console.log(ezekiel.hunt());
+console.log(sarah.hunt());
 console.log(Wagon1.ammo);
 console.log(Wagon1.food);
 console.log(Wagon1);
 
 console.log(ezekiel.eat());
-console.log(sarah.eat());
+console.log(ezekiel.hunger);
