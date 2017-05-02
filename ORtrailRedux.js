@@ -27,7 +27,8 @@ function Traveler(name, hunger, home, sick, alive) {
         } else {
             return 'Hunt failed.';
         }
-    }
+    } // this one works. 
+
     this.eat = function () {
         this.hunger = this.hunger - 25;
         if (this.sick === true) {
@@ -37,49 +38,66 @@ function Traveler(name, hunger, home, sick, alive) {
             this.home.food = this.home.food - 10;
             return name + ' is healthy and only had to eat 10 food. ' + this.home.food + ' food remains.';
         }
+    } // this one works. 
 
-    }
     this.sidekicks = function () {
-        // return this.home.
-        /*this.home.capacity = this.home.capacity - 1;
-        return this.home.capacity;*/ // that isn't quite right, mess with this when you get home.
-        // traveler.length is useful here. or perhaps this.length?  
 
-        return this;
-    } // come back to this
+        // As this stands right now it looks alright, but keep an eye on it.
+
+        return this.home.passengers.length - 1;
 
 
-}
+    } // this seems right. Keep an eye on it.
+    return this;
+
+} // as it stands now looks like all the properties and functions are in order. 
 
 
 function Wagon(day, capacity, food, ammo) {
 
-        this.day = day;
-        this.capacity = capacity;
-        this.food = food;
-        this.ammo = ammo;
-   
+    this.day = day;
+    this.capacity = capacity;
+    this.food = food;
+    this.ammo = ammo;
+    this.passengers = [];
 
-        this.join = function (traveler) {
-            // gonna need to push each traveler to an empty array, but am I pushing a 
-            // string of their name or what? Should i create a "passengers" array above?
-            // hit a wall last night need to go over some of these.
-        }
 
-        this.quarantine = function () {
+    this.join = function (traveler) {
+        // gonna need to push each traveler to an empty array, but am I pushing a 
+        // string of their name or what? Should i create a "passengers" array above?
+        // hit a wall last night need to go over some of these.
 
-        }
+        //"if this traveler is a member of this wagon, then..."
+        // be mindful of the wagon's capacity. passengers.length cannot be > capacity
 
-        this.ready = function () {
+        this.passengers.push(traveler); // "add their name to the list of passengers"
+        return this.passengers; // OK, right now this seems to work. Gonna keep plugging and see how it fits in.
 
-        }
-
-       // this.next = function() {}
-
-        
-
-        return this;
     }
+
+    this.quarantine = function () {
+
+        //look said something about a loop, figured it might be the case. loop over array of passengers,
+        // if anyone is sick (if something is === true, I guess), then the 
+        for (let i = 0; i < this.passengers.length; i++) {
+            if (this.passengers[i].sick !== false) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    this.ready = function () {
+
+    }
+
+    // this.next = function() {}
+
+
+
+    return this;
+}
 
 
 let Wagon1 = new Wagon(1, 8, 100, 100);
@@ -89,6 +107,7 @@ let nathaniel = new Traveler('Nathaniel', 15, Wagon1, true, true);
 let nancy = new Traveler('Nancy', 65, Wagon1, false, true);
 let emmett = new Traveler('Emmett', 40, Wagon1, true, true);
 
+/*
 console.log(sarah.hunt());
 console.log(Wagon1.ammo);
 console.log(Wagon1.food);
@@ -96,3 +115,7 @@ console.log(Wagon1);
 
 console.log(ezekiel.eat());
 console.log(Wagon1.join());
+
+console.log(sarah.sidekicks());*/
+console.log(Wagon1.quarantine());
+
