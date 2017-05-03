@@ -69,10 +69,13 @@ function Wagon(day, capacity, food, ammo) {
 
         //"if this traveler is a member of this wagon, then..."
         // be mindful of the wagon's capacity. passengers.length cannot be > capacity
-        if (traveler.home === this) {
+        if (this.capacity > this.passengers.length) {
             this.passengers.push(traveler); // "add their name to the list of passengers"
-            return this.passengers; // OK, right now this seems to work. Gonna keep plugging and see how it fits in.
         }
+        /* everything below is so that the console.log's of join(traveler) read better for me, functionally
+        not required (besides returning the array) */
+        return this.passengers;
+
     }
 
     this.quarantine = function () {
@@ -98,9 +101,31 @@ function Wagon(day, capacity, food, ammo) {
             }
         }
         return readyToGo;
+
     } // This one seems OK right now, keep an eye on it. 
 
-    // this.next = function() {}
+    this.next = function () {
+
+        // The wagon's 'day' increases by 1
+        // Every traveler in the wagon's hunger should increase by 10.
+        // If any traveler's hunger reaches 100, that person dies (alive = false)
+        // If anyone is sick on the wagon, there's a 15% chance each other person will get sick. 
+        // If not, there's a 5% chance each other person will get sick.
+        // If someone is sick, they have a 20% chance of becoming healthy.
+        // Everyone should try to eat once a day. Their hunger should only decrease if there's enough food for them.
+        // One member of the team should try to hunt.
+        this.day = day + 1;
+        for (let i = 0; i < this.passengers.length; i++) {
+            this.passengers[i].hunger = this.passengers[i].hunger + 10;
+            if (this.passengers[i].hunger === 100) {
+                this.passengers[i].alive === false;
+            }
+            if (this.passengers[i].sick === true) {
+                
+            }
+        } // end of for loop
+
+    } // end of this.next()
 
     return this;
 }
@@ -111,7 +136,12 @@ let ezekiel = new Traveler('Ezekiel', 35, Wagon1, false, true);
 let sarah = new Traveler('Sarah', 45, Wagon1, true, true);
 let nathaniel = new Traveler('Nathaniel', 15, Wagon1, true, true);
 let nancy = new Traveler('Nancy', 65, Wagon1, false, true);
-let emmett = new Traveler('Emmett', 40, Wagon1, true, true);
+let hezekiah = new Traveler('Hezekiah', 40, Wagon1, true, true);
+let grace = new Traveler('Grace', 40, Wagon1, true, true);
+let claire = new Traveler('Claire', 40, Wagon1, true, true);
+let jacob = new Traveler('Jacob', 40, Wagon1, true, true);
+let rebecca = new Traveler('Rebecca', 40, Wagon1, true, true);
+let john = new Traveler('John', 40, Wagon1, true, true);
 
 /*
 console.log(sarah.hunt());
@@ -127,7 +157,13 @@ Wagon1.join(ezekiel);
 Wagon1.join(sarah);
 Wagon1.join(nathaniel);
 Wagon1.join(nancy);
+Wagon1.join(hezekiah);
+// Wagon1.join(grace);
+// Wagon1.join(claire);
+// Wagon1.join(jacob); // 8th passenger right now, at capacity. If I un-comment Wagon1.join(rebecca) it pushes over capacity, returns accordingly.
+// Wagon1.join(rebecca);
 
-console.log(Wagon1.quarantine());
 
+console.log(Wagon1.ready());
+console.log(sarah.sidekicks());
 
