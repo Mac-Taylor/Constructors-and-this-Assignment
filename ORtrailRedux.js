@@ -1,5 +1,7 @@
 // Oregon Trail Object-Oriented/Constructors/this assigment
 
+//MAC YOU NEED TO FINISH THIS TODAY!
+
 /** 
  * Returns true `chance` percent of the time.
  *
