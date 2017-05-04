@@ -142,8 +142,6 @@ let hezekiah = new Traveler('Hezekiah', 40, Wagon1, true, true);
 let grace = new Traveler('Grace', 40, Wagon1, true, true);
 let claire = new Traveler('Claire', 40, Wagon1, true, true);
 let jacob = new Traveler('Jacob', 40, Wagon1, true, true);
-let rebecca = new Traveler('Rebecca', 40, Wagon1, true, true);
-let john = new Traveler('John', 40, Wagon1, true, true);
 
 /*
 console.log(sarah.hunt());
