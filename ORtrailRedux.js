@@ -117,15 +117,17 @@ function Wagon(day, capacity, food, ammo) {
         // Everyone should try to eat once a day. Their hunger should only decrease if there's enough food for them.
         // One member of the team should try to hunt.
         this.day = day + 1;
+        let prob15 = prob(15);
+        let prob5 = prob(5);
+        let prob20 = prob(20);
+        
         for (let i = 0; i < this.passengers.length; i++) {
             this.passengers[i].hunger = this.passengers[i].hunger + 10;
             if (this.passengers[i].hunger >= 100) {
                 this.passengers[i].alive === false;
             }
             if (this.passengers[i].sick === true) {
-                let prob15 = prob(15);
                 
-
             }
 
 
