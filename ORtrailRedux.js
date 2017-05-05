@@ -119,12 +119,20 @@ function Wagon(day, capacity, food, ammo) {
         this.day = day + 1;
         for (let i = 0; i < this.passengers.length; i++) {
             this.passengers[i].hunger = this.passengers[i].hunger + 10;
-            if (this.passengers[i].hunger === 100) {
+            if (this.passengers[i].hunger >= 100) {
                 this.passengers[i].alive === false;
             }
             if (this.passengers[i].sick === true) {
+                let prob15 = prob(15);
                 
+
             }
+
+
+            if (this.passengers.length === 0) {
+                return;
+            }
+
         } // end of for loop
 
     } // end of this.next()
@@ -143,25 +151,14 @@ let grace = new Traveler('Grace', 40, Wagon1, true, true);
 let claire = new Traveler('Claire', 40, Wagon1, true, true);
 let jacob = new Traveler('Jacob', 40, Wagon1, true, true);
 
-/*
-console.log(sarah.hunt());
-console.log(Wagon1.ammo);
-console.log(Wagon1.food);
-console.log(Wagon1);
-
-console.log(ezekiel.eat());
-console.log(Wagon1.join());
-
-console.log(sarah.sidekicks());*/
 Wagon1.join(ezekiel);
 Wagon1.join(sarah);
 Wagon1.join(nathaniel);
 Wagon1.join(nancy);
 Wagon1.join(hezekiah);
-// Wagon1.join(grace);
-// Wagon1.join(claire);
-// Wagon1.join(jacob); // 8th passenger right now, at capacity. If I un-comment Wagon1.join(rebecca) it pushes over capacity, returns accordingly.
-// Wagon1.join(rebecca);
+Wagon1.join(grace);
+Wagon1.join(claire);
+Wagon1.join(jacob);
 
 
 console.log(Wagon1.ready());
