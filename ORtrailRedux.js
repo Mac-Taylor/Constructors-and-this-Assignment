@@ -129,7 +129,7 @@ function Wagon(day, capacity, food, ammo) {
             if (this.passengers[i].sick === true) {
                 
             }
-
+                
 
             if (this.passengers.length === 0) {
                 return;
