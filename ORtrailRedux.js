@@ -64,6 +64,7 @@ function Wagon(capacity) {
 
     this.join = function (traveler) {
 
+
         if (this.capacity > this.passengers.length) {
             this.passengers.push(traveler); // "add their name to the list of passengers"
         } else {
@@ -71,6 +72,7 @@ function Wagon(capacity) {
                 return 'The wagon is full, no more room!';
             }
         }
+        traveler.home = this;
         return this;
     }
 
@@ -88,11 +90,10 @@ function Wagon(capacity) {
 
     this.ready = function () {
         // returns the # of passengers who are 'alive' (a property of Traveler objects)
-        // and "ready to travel". RETURN TYPE WILL BE A NUMBER BASED ON BOOLEAN CONDITION
         let readyToGo = 0;
-        for (i = 0; i < this.passengers.length; i++) {
+        for (let i = 0; i < this.passengers.length; i++) {
             if (this.passengers[i].alive === true) {
-                readyToGo + 1;
+                readyToGo++;
             }
         }
         return readyToGo;
@@ -139,10 +140,17 @@ function Wagon(capacity) {
     return this;
 } // end of wagon constructor function()
 
-function play() {
-  for (; Wagon1.ready() !== 0;) {
-    Wagon1.next();
-  }  
+// function play() {
+//     for (; Wagon1.ready() !== 0;) {
+//         Wagon1.next();
+//     }
+// }
+
+function play(wagon) {
+    for (let i = 0; wagon.ready() !== 0; i++) {
+        wagon.next();
+    }
+    return wagon.day;
 }
 
 let Wagon1 = new Wagon(8);
@@ -158,5 +166,4 @@ Wagon1.join(nathaniel);
 Wagon1.join(nancy);
 Wagon1.join(hezekiah);
 
-play();
-console.log(Wagon1.day)
+console.log(play(Wagon1));
