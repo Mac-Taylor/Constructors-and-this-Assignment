@@ -63,25 +63,19 @@ function Wagon(day, capacity, food, ammo) {
 
 
     this.join = function (traveler) {
-        // gonna need to push each traveler to an empty array, but am I pushing a 
-        // string of their name or what? Should i create a "passengers" array above?
-        // hit a wall last night need to go over some of these.
-
-        //"if this traveler is a member of this wagon, then..."
-        // be mindful of the wagon's capacity. passengers.length cannot be > capacity
+       
         if (this.capacity > this.passengers.length) {
             this.passengers.push(traveler); // "add their name to the list of passengers"
+        } else {
+            if (this.capacity  <= this.passengers.length) {
+                return 'The wagon is full, no more room!';
+            }
         }
-        /* everything below is so that the console.log's of join(traveler) read better for me, functionally
-        not required (besides returning the array) */
-        return this.passengers;
-
+        return this;
     }
 
     this.quarantine = function () {
 
-        //look said something about a loop, figured it might be the case. loop over array of passengers,
-        // if anyone is sick (if something is === true, I guess), then the 
         for (let i = 0; i < this.passengers.length; i++) {
             if (this.passengers[i].sick !== false) {
                 return true;
@@ -161,6 +155,8 @@ Wagon1.join(claire);
 Wagon1.join(jacob);
 
 
-console.log(Wagon1.ready());
-console.log(sarah.sidekicks());
+// console.log(Wagon1.ready());
+// console.log(sarah.sidekicks());
+
+console.log(Wagon1.quarantine());
 
