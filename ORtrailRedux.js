@@ -103,37 +103,41 @@ function Wagon(day, capacity, food, ammo) {
         // The wagon's 'day' increases by 1
         this.day = day + 1;
 
-
-        
-        
-        // If someone is sick, they have a 20% chance of becoming healthy.
-        // Everyone should try to eat once a day. Their hunger should only decrease if there's enough food for them.
-        // One member of the team should try to hunt.
-
         for (let i = 0; i < this.passengers.length; i++) {
             this.passengers[i].hunger = this.passengers[i].hunger + 10; // Every traveler in the wagon's hunger should increase by 10.
+            this.passengers[i].eat(); // Every should try to eat once a day.
+            this.passengers[0].hunt(); // One member (passengers[0] in this case) should try to hunt;
+
+            if (this.food >= 20) {
+                this.passengers[i].hunger = this.passengers[i].hunger - 25;
+            } // Their hunger should only decrease if there's enough food for them;
 
             if (this.passengers[i].hunger >= 100) {
                 this.passengers[i].alive === false;
             } // If any traveler's hunger reaches 100, that person dies (alive = false)
 
             if (this.quarantine() === true) {
-                if (Math.random <= 0.15) {
+                if (prob(15)) {
                     this.passengers[i].sick = true;
                 } // If anyone is sick on the wagon, there's a 15% chance each other person will get sick. 
             } else if (this.quarantine() === false) {
-                if (Math.random <= 0.05) {
+                if (prob(5)) {
                     this.passengers[i].sick = true;
                 } // If not, there's a 5% chance each other person will get sick.
             } 
+
+            if (this.passengers.sick === true) {
+                if (prob(20)) {
+                    this.passengers.sick === false;
+                }
+            } // If someone is sick, they have a 20% chance of becoming healthy.
             
             } // end of for loop
-
+            return this;
         } // end of this.next()
-
         return this;
-    }
-}
+    } // end of wagon constructor function()
+
 
 
 let Wagon1 = new Wagon(1, 8, 100, 100);
@@ -155,7 +159,4 @@ Wagon1.join(grace);
 Wagon1.join(claire);
 Wagon1.join(jacob);
 
-
-console.log(Wagon1.ready());
-console.log(sarah.sidekicks());
-console.log(Wagon1.quarantine());
+console.log(Wagon1.next());
