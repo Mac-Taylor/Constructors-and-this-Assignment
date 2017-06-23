@@ -13,7 +13,7 @@ function prob(chance) {
 
 function Traveler(name) {
     this.name = name;
-    this.hunger = 0;
+    this.hunger = 50;
     this.home = null;
     this.sick = false;
     this.alive = true;
@@ -102,8 +102,10 @@ function Wagon(capacity) {
         // The wagon's 'day' increases by 1
         this.day = this.day + 1;
 
+
         for (let i = 0; i < this.passengers.length; i++) {
 
+            this.passengers[0].hunt(); // One member (passengers[0] in this case) should try to hunt;
             this.passengers[i].hunger = this.passengers[i].hunger + 10; // Every traveler in the wagon's hunger should increase by 10.
 
             if (this.passengers[i].sick === true && this.food > 20) {
@@ -112,7 +114,6 @@ function Wagon(capacity) {
             if (this.passengers[i].sick === false && this.food > 10) {
                 this.passengers[i].eat();
             }
-            this.passengers[0].hunt(); // One member (passengers[0] in this case) should try to hunt;
 
             if (this.food >= 20) {
                 this.passengers[i].hunger = this.passengers[i].hunger - 25;
@@ -139,7 +140,7 @@ function Wagon(capacity) {
             } // If someone is sick, they have a 20% chance of becoming healthy.
 
         } // end of for loop
-
+        return this;
     } // end of this.next()
     return this;
 } // end of wagon constructor function()
@@ -153,12 +154,13 @@ function Wagon(capacity) {
 //     return Wagon1.day;
 // }
 
-let Wagon1 = new Wagon(8);
+let Wagon1 = new Wagon(5);
 let ezekiel = new Traveler('Ezekiel');
 let sarah = new Traveler('Sarah');
 let nathaniel = new Traveler('Nathaniel');
 let nancy = new Traveler('Nancy');
 let hezekiah = new Traveler('Hezekiah');
+let john = new Traveler('John');
 
 Wagon1.join(ezekiel);
 Wagon1.join(sarah);
@@ -166,5 +168,5 @@ Wagon1.join(nathaniel);
 Wagon1.join(nancy);
 Wagon1.join(hezekiah);
 
-// play();
-console.log(Wagon1.day);
+
+console.log(Wagon1.next());
