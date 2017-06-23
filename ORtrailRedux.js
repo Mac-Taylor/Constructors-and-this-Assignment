@@ -124,19 +124,19 @@ function Wagon(day, capacity, food, ammo) {
                 if (prob(5)) {
                     this.passengers[i].sick = true;
                 } // If not, there's a 5% chance each other person will get sick.
-            } 
+            }
 
             if (this.passengers.sick === true) {
                 if (prob(20)) {
                     this.passengers.sick === false;
                 }
             } // If someone is sick, they have a 20% chance of becoming healthy.
-            
-            } // end of for loop
-            return this;
-        } // end of this.next()
-        return this;
-    } // end of wagon constructor function()
+
+        } // end of for loop
+
+    } // end of this.next()
+    return this;
+} // end of wagon constructor function()
 
 
 
