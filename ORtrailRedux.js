@@ -63,11 +63,11 @@ function Wagon(day, capacity, food, ammo) {
 
 
     this.join = function (traveler) {
-       
+
         if (this.capacity > this.passengers.length) {
             this.passengers.push(traveler); // "add their name to the list of passengers"
         } else {
-            if (this.capacity  <= this.passengers.length) {
+            if (this.capacity <= this.passengers.length) {
                 return 'The wagon is full, no more room!';
             }
         }
@@ -101,37 +101,38 @@ function Wagon(day, capacity, food, ammo) {
     this.next = function () {
 
         // The wagon's 'day' increases by 1
-        // Every traveler in the wagon's hunger should increase by 10.
-        // If any traveler's hunger reaches 100, that person dies (alive = false)
-        // If anyone is sick on the wagon, there's a 15% chance each other person will get sick. 
-        // If not, there's a 5% chance each other person will get sick.
+        this.day = day + 1;
+
+
+        
+        
         // If someone is sick, they have a 20% chance of becoming healthy.
         // Everyone should try to eat once a day. Their hunger should only decrease if there's enough food for them.
         // One member of the team should try to hunt.
-        this.day = day + 1;
-        let prob15 = prob(15);
-        let prob5 = prob(5);
-        let prob20 = prob(20);
-        
+
         for (let i = 0; i < this.passengers.length; i++) {
-            this.passengers[i].hunger = this.passengers[i].hunger + 10;
+            this.passengers[i].hunger = this.passengers[i].hunger + 10; // Every traveler in the wagon's hunger should increase by 10.
+
             if (this.passengers[i].hunger >= 100) {
                 this.passengers[i].alive === false;
-            }
-            if (this.passengers[i].sick === true) {
-                
-            }
-                
+            } // If any traveler's hunger reaches 100, that person dies (alive = false)
 
-            if (this.passengers.length === 0) {
-                return;
-            }
+            if (this.quarantine() === true) {
+                if (Math.random <= 0.15) {
+                    this.passengers[i].sick = true;
+                } // If anyone is sick on the wagon, there's a 15% chance each other person will get sick. 
+            } else if (this.quarantine() === false) {
+                if (Math.random <= 0.05) {
+                    this.passengers[i].sick = true;
+                } // If not, there's a 5% chance each other person will get sick.
+            } 
+            
+            } // end of for loop
 
-        } // end of for loop
+        } // end of this.next()
 
-    } // end of this.next()
-
-    return this;
+        return this;
+    }
 }
 
 
@@ -155,8 +156,6 @@ Wagon1.join(claire);
 Wagon1.join(jacob);
 
 
-// console.log(Wagon1.ready());
-// console.log(sarah.sidekicks());
-
+console.log(Wagon1.ready());
+console.log(sarah.sidekicks());
 console.log(Wagon1.quarantine());
-
