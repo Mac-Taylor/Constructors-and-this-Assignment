@@ -11,12 +11,12 @@ function prob(chance) {
     return chance < (Math.random() * 100);
 } // Luke says you're going ot have to use this, so be mindful. 
 
-function Traveler(name, hunger, home, sick, alive) {
+function Traveler(name) {
     this.name = name;
-    this.hunger = hunger;
-    this.home = home;
-    this.sick = sick;
-    this.alive = alive;
+    this.hunger = 0;
+    this.home = null;
+    this.sick = false;
+    this.alive = true;
     this.hunt = function () {
         // uses 5 ammo from the wagon. 
         this.home.ammo = this.home.ammo - 5; // ask about this, since Wagon generates wagon objects, will this syntax work?
@@ -53,12 +53,12 @@ function Traveler(name, hunger, home, sick, alive) {
 } // as it stands now looks like all the properties and functions are in order. 
 
 
-function Wagon(day, capacity, food, ammo) {
+function Wagon(capacity) {
 
-    this.day = day;
+    this.day = 1;
     this.capacity = capacity;
-    this.food = food;
-    this.ammo = ammo;
+    this.food = 100;
+    this.ammo = 50;
     this.passengers = [];
 
 
@@ -75,13 +75,14 @@ function Wagon(day, capacity, food, ammo) {
     }
 
     this.quarantine = function () {
+        let sick = false;
 
         for (let i = 0; i < this.passengers.length; i++) {
-            if (this.passengers[i].sick !== false) {
+            if (this.passengers[i].sick === true) {
                 return true;
             }
         }
-        return false;
+        return sick;
     }
 
 
@@ -91,7 +92,7 @@ function Wagon(day, capacity, food, ammo) {
         let readyToGo = 0;
         for (i = 0; i < this.passengers.length; i++) {
             if (this.passengers[i].alive === true) {
-                readyToGo = readyToGo + 1;
+                readyToGo + 1;
             }
         }
         return readyToGo;
@@ -101,7 +102,7 @@ function Wagon(day, capacity, food, ammo) {
     this.next = function () {
 
         // The wagon's 'day' increases by 1
-        this.day = day + 1;
+        this.day = this.day + 1;
 
         for (let i = 0; i < this.passengers.length; i++) {
             this.passengers[i].hunger = this.passengers[i].hunger + 10; // Every traveler in the wagon's hunger should increase by 10.
@@ -138,25 +139,24 @@ function Wagon(day, capacity, food, ammo) {
     return this;
 } // end of wagon constructor function()
 
+function play() {
+  for (; Wagon1.ready() !== 0;) {
+    Wagon1.next();
+  }  
+}
 
-
-let Wagon1 = new Wagon(1, 8, 100, 100);
-let ezekiel = new Traveler('Ezekiel', 35, Wagon1, false, true);
-let sarah = new Traveler('Sarah', 45, Wagon1, true, true);
-let nathaniel = new Traveler('Nathaniel', 15, Wagon1, true, true);
-let nancy = new Traveler('Nancy', 65, Wagon1, false, true);
-let hezekiah = new Traveler('Hezekiah', 40, Wagon1, true, true);
-let grace = new Traveler('Grace', 40, Wagon1, true, true);
-let claire = new Traveler('Claire', 40, Wagon1, true, true);
-let jacob = new Traveler('Jacob', 40, Wagon1, true, true);
+let Wagon1 = new Wagon(8);
+let ezekiel = new Traveler('Ezekiel');
+let sarah = new Traveler('Sarah');
+let nathaniel = new Traveler('Nathaniel');
+let nancy = new Traveler('Nancy');
+let hezekiah = new Traveler('Hezekiah');
 
 Wagon1.join(ezekiel);
 Wagon1.join(sarah);
 Wagon1.join(nathaniel);
 Wagon1.join(nancy);
 Wagon1.join(hezekiah);
-Wagon1.join(grace);
-Wagon1.join(claire);
-Wagon1.join(jacob);
 
-console.log(Wagon1.next());
+play();
+console.log(Wagon1.day)
