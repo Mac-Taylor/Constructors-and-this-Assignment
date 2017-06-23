@@ -57,22 +57,19 @@ function Wagon(capacity) {
 
     this.day = 1;
     this.capacity = capacity;
-    this.food = 100;
-    this.ammo = 50;
+    this.food = 50;
+    this.ammo = 30;
     this.passengers = [];
 
 
     this.join = function (traveler) {
 
-
-        if (this.capacity > this.passengers.length) {
-            this.passengers.push(traveler); // "add their name to the list of passengers"
-        } else {
-            if (this.capacity <= this.passengers.length) {
-                return 'The wagon is full, no more room!';
-            }
-        }
         traveler.home = this;
+        if (this.capacity > this.passengers.length) {
+            this.passengers.push(traveler); // add traveler object to passengers array if there's room
+        } else {
+            return 'The wagon is full, no more room!';
+        }
         return this;
     }
 
@@ -106,8 +103,15 @@ function Wagon(capacity) {
         this.day = this.day + 1;
 
         for (let i = 0; i < this.passengers.length; i++) {
+
             this.passengers[i].hunger = this.passengers[i].hunger + 10; // Every traveler in the wagon's hunger should increase by 10.
-            this.passengers[i].eat(); // Every should try to eat once a day.
+
+            if (this.passengers[i].sick === true && this.food > 20) {
+                this.passengers[i].eat();
+            }
+            if (this.passengers[i].sick === false && this.food > 10) {
+                this.passengers[i].eat();
+            }
             this.passengers[0].hunt(); // One member (passengers[0] in this case) should try to hunt;
 
             if (this.food >= 20) {
@@ -140,18 +144,14 @@ function Wagon(capacity) {
     return this;
 } // end of wagon constructor function()
 
+
+
 // function play() {
 //     for (; Wagon1.ready() !== 0;) {
 //         Wagon1.next();
 //     }
+//     return Wagon1.day;
 // }
-
-function play(wagon) {
-    for (let i = 0; wagon.ready() !== 0; i++) {
-        wagon.next();
-    }
-    return wagon.day;
-}
 
 let Wagon1 = new Wagon(8);
 let ezekiel = new Traveler('Ezekiel');
@@ -166,4 +166,5 @@ Wagon1.join(nathaniel);
 Wagon1.join(nancy);
 Wagon1.join(hezekiah);
 
-console.log(play(Wagon1));
+// play();
+console.log(Wagon1.day);
