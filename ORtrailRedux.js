@@ -67,10 +67,10 @@ function Wagon(capacity) {
         traveler.home = this;
         if (this.capacity > this.passengers.length) {
             this.passengers.push(traveler); // add traveler object to passengers array if there's room
+            return 'All aboard!';
         } else {
             return 'The wagon is full, no more room!';
         }
-        return this;
     }
 
     this.quarantine = function () {
@@ -154,7 +154,7 @@ function Wagon(capacity) {
 //     return Wagon1.day;
 // }
 
-let Wagon1 = new Wagon(5);
+let Wagon1 = new Wagon(6);
 let ezekiel = new Traveler('Ezekiel');
 let sarah = new Traveler('Sarah');
 let nathaniel = new Traveler('Nathaniel');
@@ -169,4 +169,4 @@ Wagon1.join(nancy);
 Wagon1.join(hezekiah);
 
 
-console.log(Wagon1.next());
+console.log(Wagon1.join(john));
